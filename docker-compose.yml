@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  db:
+    environment:
+      MYSQL_ROOT_PASSWORD: devopstar
+      MYSQL_DATABASE: devopstar
+      MYSQL_USER: devopstar
+      MYSQL_PASSWORD: devopstar
+    image: mysql:5.7
+    restart: always
+    ports:
+    - 3306:3306
+    volumes:
+    - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql

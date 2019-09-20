@@ -1,0 +1,146 @@
+{
+  "ModelName": "dynamodb-leaderboard",
+  "ModelMetadata": {
+    "Author": "Nathan Glover",
+    "DateCreated": "Sep 19, 2019, 8:51 PM",
+    "DateLastModified": "Sep 20, 2019, 10:16 PM",
+    "Description": "Devopstar Leaderboard Example with secondary indexes"
+  },
+  "DataModel": [
+    {
+      "TableName": "Leaderboard",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "UserID",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "GameMode",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "TopScore",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "TopScoreDate",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "HighScore",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "GameMode",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "TopScore",
+              "AttributeType": "N"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "INCLUDE",
+            "NonKeyAttributes": [
+              "UserID"
+            ]
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "UserID": {
+            "S": "103"
+          },
+          "GameMode": {
+            "S": "Grand Prix"
+          },
+          "TopScore": {
+            "N": 201
+          },
+          "TopScoreDate": {
+            "S": "2019-09-13T12:01:32"
+          }
+        },
+        {
+          "UserID": {
+            "S": "103"
+          },
+          "GameMode": {
+            "S": "Time Trial"
+          },
+          "TopScore": {
+            "N": 504
+          },
+          "TopScoreDate": {
+            "S": "2019-09-13T13:21:30"
+          }
+        },
+        {
+          "UserID": {
+            "S": "103"
+          },
+          "GameMode": {
+            "S": "Battle"
+          },
+          "TopScore": {
+            "N": 375
+          },
+          "TopScoreDate": {
+            "S": "2019-09-13T13:29:45"
+          }
+        },
+        {
+          "UserID": {
+            "S": "102"
+          },
+          "GameMode": {
+            "S": "Battle"
+          },
+          "TopScore": {
+            "N": 440
+          },
+          "TopScoreDate": {
+            "S": "2019-09-14T16:00:22"
+          }
+        },
+        {
+          "UserID": {
+            "S": "101"
+          },
+          "GameMode": {
+            "S": "Battle"
+          },
+          "TopScore": {
+            "N": 402
+          },
+          "TopScoreDate": {
+            "S": "2019-09-15T12:00:22"
+          }
+        },
+        {
+          "UserID": {
+            "S": "101"
+          },
+          "GameMode": {
+            "S": "Grand Prix"
+          },
+          "TopScore": {
+            "N": 345
+          },
+          "TopScoreDate": {
+            "S": "2019-09-15T18:00:22"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {
+          "sqlQuery": "select UserID as UserID, GameMode as GameMode, TopScore, TopScoreDate from devopstar.LeaderboardItems;"
+        }
+      }
+    }
+  ]
+}
