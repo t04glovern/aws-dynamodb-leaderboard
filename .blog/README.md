@@ -2,7 +2,7 @@
 
 ## Preface
 
-DynamoDB is an AWS fully managed NoSQL database that is well known for being very simple to use. This similicity is great for newcomers, as long as the problem being solved doesn't require complex schemas. Issues arise for most people when trying to design systems with multiple tables in mind. This is usually where working with DynamoDB can become very complicated for newcomers.
+DynamoDB is an AWS fully managed NoSQL database that is well known for being very simple to use. This simplicity is great for newcomers, as long as the problem being solved doesn't require complex schemas. Issues arise for most people when trying to design systems with multiple tables in mind. This is usually where working with DynamoDB can become very complicated for newcomers.
 
 In this post we will be covering off how you can make use of Amazon's new NoSQL Workbench tool to design DynamoDB schemas.
 
@@ -19,7 +19,7 @@ Throughout this post are going to be building a game leaderboard system on Dynam
 
 [NoSQL Workbench can be downloaded from here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html) and is available on both Mac & Windows.
 
-**Note*: *Unfortunataly there is no Linux client yet*
+**Note**: *Unfortunately there is no Linux client yet*
 
 Once installed open it up and have a look through the main interface
 
@@ -39,7 +39,7 @@ First thought might be to do something seen below:
 
 ![Leaderboard schema incorrect design](img/aws-leaderboard-schema-01.png)
 
-The problem here is that UserID is the only unique key we are given. When adding a new entry for a different game mode the previous entry will be overriden. Traditionally we probably would end up using a separate table for each game mode, however we aren't given this luxury in NoSQL land.
+The problem here is that UserID is the only unique key we are given. When adding a new entry for a different game mode the previous entry will be overridden. Traditionally we probably would end up using a separate table for each game mode, however we aren't given this luxury in NoSQL land.
 
 Instead we're able to make use of a Sort Key; which when paired with the primary key makes the entry unique.
 
@@ -66,7 +66,7 @@ Create the table based on the inputs above and we'll move onto adding some data
 
 ### Importing Sample Data
 
-With the table model setup its time to import some data to play with. To begin with navigate to the NoSQL Workbench Visualizer and select your `Leaderboard` table
+With the table model setup it's time to import some data to play with. To begin with navigate to the NoSQL Workbench Visualizer and select your `Leaderboard` table
 
 Start by having a go manually importing data and you'll soon grow tired at the thought of having to add these by hand.
 
@@ -129,7 +129,7 @@ I've included an example of how to remap keys by using the `as` operator. Click 
 
 ![NoSQL Workbench SQL connection details](img/aws-dynamodb-leaderboard-02.png)
 
-Once you recieve the success prompt you can click `Import` again to view the results of the query
+Once you receive the success prompt you can click `Import` again to view the results of the query
 
 ![NoSQL Workbench SQL data import](img/aws-dynamodb-leaderboard-03.png)
 
@@ -157,9 +157,9 @@ Save the changes and if you navigate back to the Visualizer you should see the G
 
 ![NoSQL Workbench GSI data view](img/aws-dynamodb-leaderboard-06.png)
 
-**Note**: There appears to be a NoSQL Workbench bug when trying to render this GSI. It might be fixed in the future however for now you can see what it would look based on the commited schema in DynamoDB below:
+**Note**: There appears to be a NoSQL Workbench bug when trying to render this GSI. It might be fixed in the future however for now you can see what it would look based on the committed schema in DynamoDB below:
 
-![NoSQL Workbench GSI data view](img/aws-dynamodb-leaderboard-07.png)
+![DynamoDB GSI data view](img/aws-dynamodb-leaderboard-07.png)
 
 ## Final Thoughts
 
